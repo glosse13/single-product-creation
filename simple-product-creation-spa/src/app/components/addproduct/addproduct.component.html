@@ -1,0 +1,66 @@
+<div class="w-75 m-auto">
+  <div class="alert-danger p-2 border-info" *ngIf="error">
+    {{ error }}
+  </div>
+  <form (ngSubmit)="CreateProduct()" #form="ngForm">
+    <div class="form-group">
+      <label>Ürün Kategorisi<span class="text-danger">*</span></label>
+      <select
+        #productSelect
+        class="form-control custom-select"
+        id="buy-min-price"
+        name="categoryId"
+        [(ngModel)]="registerProduct.categoryId"
+        (change)="CategoryChange()"
+        value="-1"
+      >
+        <option value="-1" *ngIf="categories.length === 0" selected>
+          Kategoriler Yükleniyor
+        </option>
+        <option value="-1" *ngIf="categories.length > 0" selected>
+          Seçiniz
+        </option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ürün İsmi <span class="text-danger">*</span></label>
+      <div class="position-relative">
+        <input
+          type="text"
+          class="form-control pl-5"
+          placeholder="Ürün İsmi"
+          name="name"
+          [(ngModel)]="registerProduct.name"
+          required=""
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">
+      Kaydet
+    </button>
+  </form>
+  <div class="d-flex w-100 p-2 m-2">
+    <div>
+      Yeni Eklenen Ürün: <span *ngIf="newProduct">{{ newProduct.name }}</span>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Ürün Adı</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; let index = index">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>{{ product.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

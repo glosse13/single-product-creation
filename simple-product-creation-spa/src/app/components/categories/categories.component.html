@@ -1,0 +1,21 @@
+<div class="w-75 m-auto">
+  <div class="alert-danger p-2 border-info" *ngIf="categories.length === 0">
+    {{ error }}
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Kategori Adı</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; let index = index">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>{{ category.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
